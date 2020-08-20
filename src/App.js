@@ -15,7 +15,7 @@ const initialExpenses = [
 function App() {
   const result = useState(initialExpenses);
   const expenses = result[0]
-  const setExpenses = result[1]
+  // const setExpenses = result[1]
   return (
     <>
       <Alert />
