@@ -7,9 +7,9 @@ import { v4 as uuid } from 'uuid';
 
 
 const initialExpenses = [
-  { id: uuid(), chanrge: "rent", amount: 1600 },
-  { id: uuid(), chanrge: "car payment", amount: 600 },
-  { id: uuid(), chanrge: "credit card payment", amount: 1200 }
+  { id: uuid(), charge: "rent", amount: 1600 },
+  { id: uuid(), charge: "car payment", amount: 600 },
+  { id: uuid(), charge: "credit card payment", amount: 1200 }
 ]
 
 function App() {
