@@ -28,6 +28,9 @@ function App() {
   //state values - id
   let [expId, setExpId] = useState('');
 
+  //state values - alert
+  let [alert, setAlert] = useState({ show: false });
+
   //functionality
   const handleExpenses = e => {
     e.preventDefault();
@@ -43,11 +46,12 @@ function App() {
       expense.charge = e.target[0].value;
       expense.amount = parseInt(e.target[1].value);
       setExpenses([...expenses])
-      //set to defaults
-      setEditMode(false);
-      setExpId('')
     }
+
+    handleAlert({ type: 'success', text: `Successfully ${editMode ? 'Edited' : 'Added'} Expense` })
     //set to defaults
+    setEditMode(false);
+    setExpId('')
     setCharge('');
     setAmount('');
   }
@@ -73,9 +77,26 @@ function App() {
     setExpenses([...exps])
   }
 
+  const handleAlert = ({ type, text }) => {
+    setAlert({ show: true, type, text })
+    //set alert back to false after 3secs
+    setTimeout(() => {
+      setAlert({ show: false })
+    }, 3000);
+  }
+
+  const handleClearExpenses = () => {
+    setExpenses([])
+    //set to defaults
+    setEditMode(false);
+    setExpId('')
+    setCharge('');
+    setAmount('');
+  }
+
   return (
     <>
-      <Alert />
+      {alert.show && <Alert type={alert.type} text={alert.text} />}
       <h1>budget calculator</h1>
       <main className="App">
         <ExpenseForm
@@ -90,6 +111,7 @@ function App() {
           expenses={expenses}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
+          handleClearExpenses={handleClearExpenses}
         />
       </main>
       <h1>total spending : <span className="total">
